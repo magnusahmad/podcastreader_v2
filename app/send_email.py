@@ -13,8 +13,8 @@ from email import encoders
 
 # with open(new_path) as f:
 #     data = json.load(f)
-sender_email = os.getenv['EMAIL_USERNAME']
-sender_password = os.getenv['EMAIL_PASSWORD']
+sender_email = os.getenv('EMAIL_USERNAME')
+sender_password = os.getenv('EMAIL_PASSWORD')
 subject = 'Your new ebook from Podcast Reader'
 
 def send_email(body, receiver_email, attachment_path):

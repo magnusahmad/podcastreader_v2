@@ -1,0 +1,58 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- HTMX -->
+     <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+    {% assets 'css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+
+
+    <title>Podcast Reader</title>
+  </head>
+  <div class="hero">
+<div class="hero-content">
+<h1>Discover Endless Stories</h1>
+<p>Immerse yourself in the world of books with our curated collection of literary masterpieces. Explore, learn, and be inspired.</p>
+<a href='#main-content'>
+<button class="create-ebook-button">Create from URL</button>
+</a>
+<button class="shop-button">Shop<i>(Coming soon)</i></button>
+</div>
+</div>
+<div class="parent">
+<div class="main-content">
+<h1 class="top-headline">Create an ebook from your favourite podcast</h1>
+<div clas="main-content" id="main-content">
+<p>Simply add a YouTube link and you will receive a Kindle-formatted ebook to your email after some minutes.</p>
+<form hx-post="/submit" hx-swap="outerHTML" hx-target="#main-content">
+<input
+type="text"
+name="url"
+placeholder="URL link to a YouTube video you'd like to transcribe..."
+></input>
+<input
+type="email"
+name="email"
+placeholder="Which email do you want the eBook be sent to?"
+/>
+<button type="submit">Generate Ebook!</button>
+</form>
+<p>Free version ebooks come unedited with basic transcription. If you would like higher fidelity transcriptions with editing, please check our paid options.</p>
+<p>Test: https://www.youtube.com/watch?v=cNbnef_eXBM</p>
+</div>
+</div>
+<div class="secondary-content">
+</div> 
+</div>  
+<footer class="footer">
+<div class="footer-content">
+<span class="footer-brand">Podcast Reader</span>
+<span class="footer-made-with">Twitter: <a href="twitter.com/finallyreturn">finallyreturn</a></span>
+</div>
+</footer>

@@ -1,0 +1,13 @@
+#venv#
+######
+venv/
+.venv/
+
+A#pycache#
+#########
+app/__pycache__/
+
+#credentials#
+#############
+app/credentials/
+

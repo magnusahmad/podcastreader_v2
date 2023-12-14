@@ -135,7 +135,7 @@ body, html {
   justify-content: left;
   align-items: center;
   height: 100vh; /* Full height of the viewport */
-  background-image: url('./images/ereader-hero.webp'); 
+  background-image: url('../public/ereader-hero.webp'); 
   background-size: cover;
   background-position: center;
   color: white;

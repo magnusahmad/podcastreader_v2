@@ -8,13 +8,13 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-cur_path = os.getcwd()
-new_path = os.path.relpath('./credentials/email_credentials.json', cur_path)
+# cur_path = os.getcwd()
+# # new_path = os.path.relpath('./credentials/email_credentials.json', cur_path)
 
-with open(new_path) as f:
-    data = json.load(f)
-sender_email = data['EMAIL_USERNAME']
-sender_password = data['EMAIL_PASSWORD']
+# with open(new_path) as f:
+#     data = json.load(f)
+sender_email = os.getenv['EMAIL_USERNAME']
+sender_password = os.getenv['EMAIL_PASSWORD']
 subject = 'Your new ebook from Podcast Reader'
 
 def send_email(body, receiver_email, attachment_path):

@@ -72,7 +72,7 @@ def download_youtube(url, email):
     print(f'Working directory: {dir}')
     ls = os.listdir(dir)
     print(f'list directory: \n {ls}')
-    ext = '.webm'
+    ext = ('.webm', '.mp4')
     try:
         output_file = print_filename(dir, ext)
     except Exception as e:

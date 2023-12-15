@@ -1,7 +1,6 @@
 # email_sender.py
 
 import os
-import json
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText

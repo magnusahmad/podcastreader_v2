@@ -24,6 +24,7 @@ def submit():
         <p class="fade-in-text">Your submission has been received. You will receive your new ebook at {email} in some minutes...</p>
         """
     except Exception as e:
+        print(f'Exception: {e}')
         response = f"""
         <p class="fade-in-text">That didn't work. Please refresh the page and try again.</p>
         """

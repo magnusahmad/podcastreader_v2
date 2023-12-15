@@ -69,6 +69,9 @@ def download_youtube(url, email):
     except Exception as e:
         print(f'Failed to download: {e}', file=sys.stderr)
     dir = os.getcwd()
+    print(f'Working directory: {dir}')
+    ls = os.listdir(dir)
+    print(f'list directory: \n {ls}')
     ext = '.webm'
     try:
         output_file = print_filename(dir, ext)

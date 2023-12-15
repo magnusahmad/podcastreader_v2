@@ -29,6 +29,7 @@ def print_filename(directory, extension):
 def download_video(url):
     ydl_opts = {
     'forceip':'4',
+    'cookies':'cookies.txt'
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -104,7 +105,7 @@ def download_youtube(url, email):
     
     #move the epub
     Path(epub_file).rename(f"ebooks/{epub_file}")
-    
+
     return "success!"
 
 if __name__ == "__main__":

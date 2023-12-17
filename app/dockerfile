@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Update software repositories
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y python3 python3-pip ffmpeg python3-venv
+    apt-get install -y python3 python3-pip python3-venv
 
 # Install FFmpeg
 RUN apt-get install -y ffmpeg && apt-get clean && rm -rf /var/lib/apt/lists/*

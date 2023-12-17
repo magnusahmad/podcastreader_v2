@@ -28,6 +28,6 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Command to run your application
-CMD ["python3", "app.py"]
+CMD ["python3 app.py"]
 # Replace 'python' and 'app.py' with the command to run your application
 

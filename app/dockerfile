@@ -19,8 +19,14 @@ COPY . /app
 # (Optional) Expose ports, if your application requires it
 # EXPOSE 80
 
-# Install Python dependencies
-RUN pip3 install -r requirements.txt
+# Create a Python virtual environment and activate it
+RUN python3 -m venv /app/venv
+ENV PATH="/app/venv/bin:$PATH"
+
+# Install Python dependencies from requirements.txt
+ENV MAX_CONCURRENT_PROCESSES=1
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 # Command to run your application
 CMD ["python3", "app.py"]

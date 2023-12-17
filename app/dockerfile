@@ -17,7 +17,7 @@ WORKDIR /app
 COPY . /app
 
 # (Optional) Expose ports, if your application requires it
-# EXPOSE 80
+EXPOSE 8080
 
 # Create a Python virtual environment and activate it
 RUN python3 -m venv /app/venv
@@ -28,6 +28,6 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Command to run your application
-# CMD ["python3", "app.py"]
+CMD ["python3", "app.py"]
 # Replace 'python' and 'app.py' with the command to run your application
 

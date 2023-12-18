@@ -25,9 +25,8 @@ ENV PATH="/app/venv/bin:$PATH"
 
 # Install Python dependencies from requirements.txt
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install Flask-Assets Flask Jinja2 websockets webassets
 
 # Command to run your application
-CMD ["python3 app.py"]
+CMD ["python3", "app.py"]
 # Replace 'python' and 'app.py' with the command to run your application
-

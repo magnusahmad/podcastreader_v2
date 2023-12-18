@@ -68,7 +68,7 @@ def download_youtube(url, email):
         result = download_video(url)
     except Exception as e:
         print(f'Failed to download: {e}', file=sys.stderr)
-    # dir = os.getcwd()
+    dir = os.getcwd()
     # print(f'Working directory: {dir}')
     # ls = os.listdir(dir)
     # print(f'list directory: \n {ls}')
@@ -84,6 +84,10 @@ def download_youtube(url, email):
         transcribe_txt(output_file_mp3)
     except Exception as e:
         print(f'Error during transcription: {e}', file=sys.stderr)
+        try:
+            transcribe_txt(output_file)
+        except Exception as e:
+            print(f'Error during transcription: {e}', file=sys.stderr)
     
     #delete video and audio files
     Path.unlink(output_file)

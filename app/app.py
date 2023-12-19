@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from flask_assets import Bundle, Environment
-from download_youtube_notranscribe import * 
+from download_youtube import * 
 ### !!changed to download_youtube_notranscribe to test deployment without whisper!! ###
 
 app = Flask(__name__)

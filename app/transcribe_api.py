@@ -3,7 +3,7 @@ import os
 import sys
 
 def whisper_transcribe(input_file):
-    os.environ["OPENAI_API_KEY"] = os.getenv['OPENAI_KEY']
+    os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_KEY')
     client = OpenAI()
 
     txt_file = (input_file.split('.')[0] + '.txt')
@@ -21,6 +21,7 @@ def whisper_transcribe(input_file):
     try:
         with open(txt_file, "w") as text_file:
             text_file.write(transcript)
+            return 'Success!'
     except Exception as e:
         print(f'Error saving txt file: {e}', file=sys.stderr)
 

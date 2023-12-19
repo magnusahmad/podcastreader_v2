@@ -6,7 +6,7 @@ import subprocess
 from send_email import send_email
 from pathlib import Path
 import ffmpeg
-from transcribe_api import *
+from transcribe_api import whisper_transcribe
 
 def print_filename(directory, extension):
     """
@@ -110,10 +110,10 @@ def download_youtube(url, email):
     
     #delete video and audio files
     try:
-        Path.unlink(output_file)
-        Path.unlink(output_file_mp3)
+        os.unlink(output_file)
+        os.unlink(output_file_mp3)
     except Exception as e:
-        print(f'Error deleted mp3 files: {e}', file=sys.stderr)
+        print(f'Error deleting mp3 files: {e}', file=sys.stderr)
 
     txt_file = (output_file.split('.')[0] + '.txt')
     epub_file = (output_file.split('.')[0] + '.epub')

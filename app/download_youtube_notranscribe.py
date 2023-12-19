@@ -88,15 +88,15 @@ def download_youtube(url, email):
     except Exception as e:
         print(f'Error getting filename: {e}', file=sys.stderr)
     
-    print(f'Video Downloaded: {output_file}', file=sys.stdout)
+    print(f'Video Downloaded: {output_file}', file=sys.stderr)
     output_file_mp3 = (output_file.split('.')[0] + '.mp3')
     output_file_mp3_shortened = 'shortened_' + str(output_file_mp3)
     
     try:
         convert_mp4_to_mp3(output_file, output_file_mp3)
-        print(f'Converted to mp3: {output_file_mp3}', file=sys.stdout)
+        print(f'Converted to mp3: {output_file_mp3}', file=sys.stderr)
         shorten_audio(output_file_mp3, output_file_mp3_shortened)
-        print(f'Shortened to 20 mins: {output_file_mp3_shortened}', file=sys.stdout)
+        print(f'Shortened to 20 mins: {output_file_mp3_shortened}', file=sys.stderr)
     except Exception as e:
         print(f'Error during conversion or shortening: {e}', file=sys.stderr)
 
@@ -110,8 +110,11 @@ def download_youtube(url, email):
     #         print(f'Error during transcription: {e}', file=sys.stderr)
     
     #delete video and audio files
-    Path.unlink(output_file)
-    Path.unlink(output_file_mp3)
+    try:
+        Path.unlink(output_file)
+        Path.unlink(output_file_mp3)
+    except Exception as e:
+        print(f'Error deleted mp3 files: {e}', file=sys.stderr)
 
     # txt_file = (output_file.split('.')[0] + '.txt')
     # epub_file = (output_file.split('.')[0] + '.epub')

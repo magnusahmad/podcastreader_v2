@@ -1,13 +1,9 @@
 #venv#
-######
 venv/
 .venv/
 
-A#pycache#
-#########
+#pycache#
 app/__pycache__/
 
 #credentials#
-#############
 app/credentials/
-

@@ -87,15 +87,18 @@ def download_youtube(url, email):
         output_file = print_filename(dir, ext)
     except Exception as e:
         print(f'Error getting filename: {e}', file=sys.stderr)
+    
+    print(f'Video Downloaded: {output_file}', file=sys.stdout)
     output_file_mp3 = (output_file.split('.')[0] + '.mp3')
     output_file_mp3_shortened = 'shortened_' + str(output_file_mp3)
-    print(f'Video Downloaded: {output_file}')
     
-    convert_mp4_to_mp3(output_file, output_file_mp3)
-    print(f'Converted to mp3: {output_file_mp3}')
-    
-    shorten_audio(output_file_mp3, output_file_mp3_shortened)
-    print(f'Shortened to 20 mins: {output_file_mp3_shortened}')
+    try:
+        convert_mp4_to_mp3(output_file, output_file_mp3)
+        print(f'Converted to mp3: {output_file_mp3}', file=sys.stdout)
+        shorten_audio(output_file_mp3, output_file_mp3_shortened)
+        print(f'Shortened to 20 mins: {output_file_mp3_shortened}', file=sys.stdout)
+    except Exception as e:
+        print(f'Error during conversion or shortening: {e}', file=sys.stderr)
 
     # try:
     #     transcribe_txt(output_file_mp3)

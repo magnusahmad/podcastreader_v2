@@ -90,7 +90,7 @@ def download_youtube(url, email):
     print(f'Video Downloaded: {output_file}', file=sys.stderr)
     
     output_file_mp3 = (output_file.split('.')[0] + '.mp3')
-    output_file_mp3_shortened = 'preview_' + str(output_file_mp3)
+    output_file_mp3_shortened = '(Preview) ' + str(output_file_mp3)
     
     try:
         convert_mp4_to_mp3(output_file, output_file_mp3)

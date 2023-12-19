@@ -2,11 +2,11 @@ import yt_dlp
 import sys
 import os
 import subprocess
-import whisper
-from urllib.parse import unquote
+# import whisper
 from send_email import send_email
 from pathlib import Path
 import ffmpeg
+from transcribe_api import *
 
 def print_filename(directory, extension):
     """
@@ -38,12 +38,12 @@ def download_video(url):
         except Exception as e: 
             print(f"Error downloading video: {e}", file=sys.stderr)
 
-def transcribe_txt(filename):
-    model = whisper.load_model("base")
-    result = model.transcribe(filename)
-    txt_filename = (filename.split('.')[0] + '.txt')
-    with open(txt_filename, "w", encoding="utf-8") as txt:
-        txt.write(result["text"])
+# def transcribe_txt(filename):
+#     model = whisper.load_model("base")
+#     result = model.transcribe(filename)
+#     txt_filename = (filename.split('.')[0] + '.txt')
+#     with open(txt_filename, "w", encoding="utf-8") as txt:
+#         txt.write(result["text"])
 
 def convert_txt_to_epub(txt_file, epub_file):
     try:
@@ -63,6 +63,16 @@ def convert_mp4_to_mp3(input_file, output_file):
     except Exception as e:
         print(f'Failed to convert to mp3: {e}', file=sys.stderr)
 
+def shorten_audio(input_file, output_file):
+    try:
+        (
+            ffmpeg.input(input_file)
+            .output(output_file, t='20:00', c='copy')
+            .run()
+        )
+    except Exception as e:
+        print(f'Failed to convert to mp3: {e}', file=sys.stderr)
+
 def download_youtube(url, email):
     try:
         result = download_video(url)
@@ -77,21 +87,33 @@ def download_youtube(url, email):
         output_file = print_filename(dir, ext)
     except Exception as e:
         print(f'Error getting filename: {e}', file=sys.stderr)
+    print(f'Video Downloaded: {output_file}', file=sys.stderr)
+    
     output_file_mp3 = (output_file.split('.')[0] + '.mp3')
-    convert_mp4_to_mp3(output_file, output_file_mp3)
-    print(f'Video Downloaded: {output_file}')
+    output_file_mp3_shortened = 'shortened_' + str(output_file_mp3)
+    
     try:
-        transcribe_txt(output_file_mp3)
+        convert_mp4_to_mp3(output_file, output_file_mp3)
+        print(f'Converted to mp3: {output_file_mp3}', file=sys.stderr)
+        shorten_audio(output_file_mp3, output_file_mp3_shortened)
+        print(f'Shortened to 20 mins: {output_file_mp3_shortened}', file=sys.stderr)
+    except Exception as e:
+        print(f'Error during conversion or shortening: {e}', file=sys.stderr)
+    try:
+        whisper_transcribe(output_file_mp3_shortened)
     except Exception as e:
         print(f'Error during transcription: {e}', file=sys.stderr)
-        try:
-            transcribe_txt(output_file)
-        except Exception as e:
-            print(f'Error during transcription: {e}', file=sys.stderr)
+        # try:
+        #     transcribe_txt(output_file)
+        # except Exception as e:
+        #     print(f'Error during transcription: {e}', file=sys.stderr)
     
     #delete video and audio files
-    Path.unlink(output_file)
-    Path.unlink(output_file_mp3)
+    try:
+        Path.unlink(output_file)
+        Path.unlink(output_file_mp3)
+    except Exception as e:
+        print(f'Error deleted mp3 files: {e}', file=sys.stderr)
 
     txt_file = (output_file.split('.')[0] + '.txt')
     epub_file = (output_file.split('.')[0] + '.epub')
@@ -100,9 +122,6 @@ def download_youtube(url, email):
     except Exception as e:
         print(f'Error converting to epub: {e}', file=sys.stderr)
 
-    #delete text file
-    Path.unlink(txt_file)
-
     body = f'Hello \n \n Your new ebook, {epub_file} is attached to this email. \n \n Thank you for using Podcast Reader.'
     attachment_path = epub_file
     try:
@@ -110,9 +129,9 @@ def download_youtube(url, email):
     except Exception as e:
         print(f'Error sending email: {e}', file=sys.stderr)
     
-    #move the epub
+    #move the epub and corrseponding txt file
     Path(epub_file).rename(f"ebooks/{epub_file}")
-
+    Path(txt_file).rename(f"ebooks/{txt_file}")
     return "success!"
 
 if __name__ == "__main__":

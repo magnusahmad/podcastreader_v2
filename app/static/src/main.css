@@ -15,7 +15,7 @@ body, html {
   animation: fadeIn 5s;
 }
 
-
+.flashes {color:#004085;background-color:#cce5ff;border-color:#b8daff}
 
 .parent {
   margin: 1rem;

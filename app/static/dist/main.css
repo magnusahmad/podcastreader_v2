@@ -211,12 +211,26 @@ body, html {
   }
 }
 
+.footer-div {
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  margin-left: -0.8%;
+  /* margin: 0;
+  padding: 0;
+  border-width: 0; */
+}
+
 .footer {
   background-color: #073d3a; /* Match this color to the one in your image */
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 10vh;
   color: #fff; /* This is white, assuming your text is white */
   padding: 1rem 0; /* Adjust the padding to match your design */
-  display: flex;
-  height: 10vh;
+  display: flex; */
+  /* height: 10vh; */
   justify-content: space-between; /* This will push the two spans to the sides */
   align-items: center; /* This will vertically center the text */
 }

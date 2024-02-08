@@ -1,6 +1,4 @@
 from flask import render_template, request, flash, get_flashed_messages, session, redirect, url_for, abort, current_app
-import firebase_admin
-from firebase_admin import credentials, auth
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from dotenv import load_dotenv
 from urllib.parse import urlencode
@@ -8,8 +6,6 @@ from datetime import datetime
 from sqlalchemy import select
 
 from app import app, db, User, Shop_Button
-# from models import Shop_Button, User
-import auth
 from download_youtube import * 
 
 import secrets
@@ -49,6 +45,10 @@ def submit():
         """
     return response
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    return render_template('register.html')
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if ('user' in session):
@@ -75,10 +75,6 @@ def login():
                 else:
                     return f'Login failed due to unknown reason'
     return render_template('login.html')
-
-cred = credentials.Certificate('podcastreader-firebase-key.json')
-# firebase_admin.initialize_app(cred)
-
 
 login = LoginManager(app)
 login.login_view = 'index'

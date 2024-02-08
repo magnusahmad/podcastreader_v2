@@ -210,23 +210,24 @@ a:hover {
 
 
 .login-button {
-  background-color: #2a227c; /* The button's background color */
+  background-color: #073d3a; /* The button's background color */
   color: #e8e1e1; /* The button text color */
+  box-shadow: inset 0 0 0 0 #19171f;
   padding-top: 10px; /* Top and bottom padding and left and right padding */
   padding-bottom: 10px;
   padding-right: 10px;
   font-size: 1.25rem; /* The size of the font */
   border: 1px solid #131224; /* The border of the button */
-  border-radius: 10px; /* The radius of the border corners */
+  border-radius: 8px; /* The radius of the border corners */
   cursor: pointer; /* The type of cursor when you hover over the button */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for the hover effect */
+  transition: background-color 0.5s ease, color 0.3s ease, box-shadow .4s ease-in; /* Transition for the hover effect */
   text-align: center; /* Align the text to the center */
   display: inline-block; /* Display method to allow width and height */
   text-decoration: none; /* Remove underline from links */
 }
 
 .login-button:hover {
-  background-color: #312169; /* Slightly darker shade when hovered */
+  box-shadow: inset 150px 0 0 0 #171f1e; /* Slightly darker shade when hovered */
 }
 
 .register-button {

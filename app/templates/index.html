@@ -3,13 +3,28 @@
 {% extends "base.html" %}
 
 {% block main %}
-<div class="hero">
-<div class="hero-content">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flashes">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 {% if user %}
+    <div class="header-div">
+        <header class="header">
+        <div class="header-content">
+            <a href="http://localhost:8080/logout" class="btn tablink">Logout</a>
+        </div>
+        </footer>
+        </div>
+    <div class="hero">
+    <div class="hero-content">
+
     <h1>Welcome back, {{user}}</h1>
-{% else %}
-    <h1>Discover your favourite podcasts on Kindle</h1>
-{% endif %}
+
 <p>Create ebooks from podcasts on demand, or browse an extensive collection of professionally edited podcast ebooks. Start reading podcasts now!</p>
 <a href='#main-content'>
 <button class="create-ebook-button">Create from URL</button>
@@ -39,22 +54,27 @@ placeholder="Which email do you want the eBook be sent to?"
 </div>
 
 </div>
-<div class="container mt-5">
-    <!-- Sign In Form -->
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form hx-post="/magic_link_login" id="signInForm">
-                <h5 class="text-center">Enter your email to create an account and receive a login link</h5>
-                <div class="form-group">
-                <input type="email" name="email" class="form-control" id="signInEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </form>
-        </div>
-    </div>
-<div class="secondary-content">
-</div> 
 
-</div>  
+{% else %}
 
+<div class="header-div">
+    <a href="http://localhost:8080/login" class="btn tablink">Login</a>
+</div>
+<div class="hero">
+<div class="hero-content">
+
+<h1>Discover your favourite podcasts on Kindle</h1>
+
+<p>Create ebooks from podcasts on demand, or browse an extensive collection of professionally edited podcast ebooks. Start reading podcasts now!</p>
+<a href='http://localhost:8080/login'>
+<button class="login-button">Login to begin</button>
+</a>
+<br><br><br>
+<a href='http://localhost:8080/login'>
+<button class="register-button">Or register for free</button>
+</a>
+</div>
+</div>
+
+{% endif %}
 {% endblock main %}

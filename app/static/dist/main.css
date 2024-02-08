@@ -6,6 +6,14 @@ body, html {
   scroll-behavior: smooth;
 }
 
+a {
+  text-decoration: none;
+  padding: 1%
+}
+
+a:hover {
+  text-decoration: none;
+}
 .App {
   text-align: center; /* Center the content by default */
 }
@@ -152,6 +160,11 @@ body, html {
   margin-bottom: 0.5em;
 }
 
+.hero h5 {
+  margin: 0;
+}
+
+
 .hero p {
   font-size: 1.25rem; /* Adjust size as needed */
   margin-bottom: 2em;
@@ -195,6 +208,44 @@ body, html {
   background-color: #cba962; /* Slightly darker shade when hovered */
 }
 
+
+.login-button {
+  background-color: #2a227c; /* The button's background color */
+  color: #e8e1e1; /* The button text color */
+  padding-top: 10px; /* Top and bottom padding and left and right padding */
+  padding-bottom: 10px;
+  padding-right: 10px;
+  font-size: 1.25rem; /* The size of the font */
+  border: 1px solid #131224; /* The border of the button */
+  border-radius: 10px; /* The radius of the border corners */
+  cursor: pointer; /* The type of cursor when you hover over the button */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for the hover effect */
+  text-align: center; /* Align the text to the center */
+  display: inline-block; /* Display method to allow width and height */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.login-button:hover {
+  background-color: #312169; /* Slightly darker shade when hovered */
+}
+
+.register-button {
+  background-color: #090722; /* The button's background color */
+  color: #e8e1e1; /* The button text color */
+  padding: 10px; /* Top and bottom padding and left and right padding */
+  font-size: 1.25rem; /* The size of the font */
+  border: 1px solid #090722; /* The border of the button */
+  border-radius: 8px; /* The radius of the border corners */
+  cursor: pointer; /* The type of cursor when you hover over the button */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for the hover effect */
+  text-align: center; /* Align the text to the center */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.register-button:hover {
+  background-color: #312169; /* Slightly darker shade when hovered */
+}
+
 /* Add responsive adjustments if necessary */
 @media (max-width: 768px) {
   .hero-content {
@@ -209,6 +260,42 @@ body, html {
   .hero p {
     font-size: 1rem;
   }
+}
+
+.header-div {
+  width: 100%;
+  position: fixed;
+  padding-top: 0px;
+  margin-left: -0.8%;
+  /* margin: 0;
+  padding: 0;
+  border-width: 0; */
+}
+
+.header-div {
+  height: 5%;
+  width: 101%;
+  text-align: right;
+  background: #073d3a;
+  color: white;
+  font-size: 20px;
+}
+
+.tablink {
+  background-color: #073d3a;
+  color: white;
+  float: right;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 20px;
+  width: 10%;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+  background-color: #777;
 }
 
 .footer-div {

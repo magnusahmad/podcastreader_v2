@@ -1,17 +1,79 @@
-from flask import Flask, session, request, redirect, render_template
+from flask import Flask, redirect, url_for, render_template, flash, session, \
+    current_app, request, abort
 from flask_assets import Bundle, Environment
 from flask_sqlalchemy import SQLAlchemy
-import pyrebase 
-import os
+from flask_login import LoginManager, UserMixin, login_user, logout_user,\
+    current_user
+from urllib.parse import urlencode
 from dotenv import load_dotenv
-### !!changed to download_youtube_notranscribe to test deployment without whisper!! ###
+import requests
+import os
+import secrets
 
 load_dotenv()
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('CSRF_SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['OAUTH_PROVIDERS'] = {
+    # Google OAuth 2.0 documentation:
+    # https://developers.google.com/identity/protocols/oauth2/web-server#httprest
+    'google': {
+        'client_id': os.environ.get('GOOGLE_CLIENT_ID'),
+        'client_secret': os.environ.get('GOOGLE_CLIENT_SECRET'),
+        'authorize_url': 'https://accounts.google.com/o/oauth2/auth',
+        'token_url': 'https://accounts.google.com/o/oauth2/token',
+        'userinfo': {
+            'url': 'https://www.googleapis.com/oauth2/v3/userinfo',
+            'email': lambda json: json['email'],
+        },
+        'scopes': ['https://www.googleapis.com/auth/userinfo.email'],
+    }
+}
+
+db = SQLAlchemy(app)
+
+class Shop_Button(db.Model):
+    __tablename__ = 'shopbutton'
+    date = db.Column(db.Date, nullable=False, primary_key=True)
+    click = db.Column(db.Integer, primary_key=False)
+
+    def __repr__(self):
+        return f'Shop button was clicked on {self.date}'
+    
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), nullable=False)
+    email = db.Column(db.String(64), nullable=True)
+
+assets = Environment(app)
+css = Bundle("src/main.css", output="dist/main.css")
+
+assets.register("css", css)
+css.build()
+
+from routes import *
+
+with app.app_context():
+    db.create_all()
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    # import json
+    # cur_path = os.getcwd()
+    # new_path = os.path.relpath('./credentials/openai_key.json', cur_path)
+
+    # with open(new_path) as f:
+    #     credentials = json.load(f)
+    # file = input('Enter filename: ')
+    # whisper_transcribe(file)
+
+
+
+# OLD
 
 # import json
 # cur_path = os.getcwd()
@@ -25,32 +87,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI'
 # with open(sql_path) as sql:
 #     data = json.load(sql)
 #     app.config['SQLALCHEMY_DATABASE_URI'] = data['SQLALCHEMY_DATABASE_URI']
-
-db = SQLAlchemy(app)
-
+    
 # app.config['SECRET_KEY'] = os.getenv('csrf_key')
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('sqlalchemy_uri')
 # db = SQLAlchemy(app)
-
-# db = SQLAlchemy(app)
-
-app.app_context().push()
-
-assets = Environment(app)
-css = Bundle("src/main.css", output="dist/main.css")
-
-assets.register("css", css)
-css.build()
-
-from routes import *
-
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
-    # import json
-    # cur_path = os.getcwd()
-    # new_path = os.path.relpath('./credentials/openai_key.json', cur_path)
-
-    # with open(new_path) as f:
-    #     credentials = json.load(f)
-    # file = input('Enter filename: ')
-    # whisper_transcribe(file)

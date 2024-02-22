@@ -1,14 +1,10 @@
-from flask import Flask, redirect, url_for, render_template, flash, session, \
-    current_app, request, abort
+from flask import Flask
 from flask_assets import Bundle, Environment
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
     current_user
-from urllib.parse import urlencode
 from dotenv import load_dotenv
-import requests
 import os
-import secrets
 
 load_dotenv()
 
@@ -35,19 +31,28 @@ app.config['OAUTH_PROVIDERS'] = {
 
 db = SQLAlchemy(app)
 
-class Shop_Button(db.Model):
-    __tablename__ = 'shopbutton'
-    date = db.Column(db.Date, nullable=False, primary_key=True)
-    click = db.Column(db.Integer, primary_key=False)
-
-    def __repr__(self):
-        return f'Shop button was clicked on {self.date}'
-    
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), nullable=True)
+
+class Shop_button(db.Model):
+    __tablename__ = 'shop_button'
+    date = db.Column(db.Date, nullable=False, primary_key=True)
+    click = db.Column(db.Integer, primary_key=False)
+
+    def __repr__(self):
+        return f'Shop button was clicked on {self.date}'
+
+class Shop(db.Model):
+    __tablename__ = 'shop_click'
+    datetime = db.Column(db.DateTime, nullable=False, primary_key=True)
+    click = db.Column(db.Integer, primary_key=False)
+
+    def __repr__(self):
+        return f'Shop button was clicked on {self.datetime}'
+    
 
 assets = Environment(app)
 css = Bundle("src/main.css", output="dist/main.css")

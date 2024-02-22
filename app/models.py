@@ -4,13 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy(app)
 
-class Shop_Button(db.Model):
-    __tablename__ = 'shopbutton'
-    date = db.Column(db.Date, nullable=False, primary_key=True)
+class Shop(db.Model):
+    __tablename__ = 'shop_click'
+    datetime = db.Column(db.DateTime, nullable=False, primary_key=True)
     click = db.Column(db.Integer, primary_key=False)
 
     def __repr__(self):
-        return f'Shop button was clicked on {self.date}'
+        return f'Shop button was clicked on {self.datetime}'
     
 class User(UserMixin, db.Model):
     __tablename__ = 'users'

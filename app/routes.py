@@ -3,16 +3,13 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 from dotenv import load_dotenv
 from urllib.parse import urlencode
 from datetime import datetime
-from sqlalchemy import select
+# from sqlalchemy import select
 
-from app import app, db, User, Shop_Button
+from app import app, db, User, Shop
 from download_youtube import * 
 
 import secrets
-import jsonify
 import requests
-import os
-
 
 @app.route("/")
 def homepage():
@@ -21,13 +18,6 @@ def homepage():
         return render_template("index.html", user=session['user'])
     else:
         return render_template("index.html")
-
-@app.route("/shop_button", methods=["POST"])
-def shop_button():
-    new_click = Shop_Button(date=datetime.utcnow(), click='1')
-    db.session.add(new_click)
-    db.session.commit()
-    flash('Shop button was clicked')
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -51,29 +41,6 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if ('user' in session):
-        return f'<p>Hi, {session["user"]}</p>'
-    if request.method == "POST":
-        email = request.form.get('email')
-        password = request.form.get('password')
-        try:
-            user = auth.auth.create_user_with_email_and_password(email, password)
-            session['user'] = email
-            return render_template('index.html', user=session['user'])
-        except:
-            try:
-                user = auth.auth.sign_in_with_email_and_password(email,password)
-                # auth.auth.sign_in_with_email_and_password(email, password)
-                session['user'] = email
-                return render_template('index.html', user=session['user'])
-            
-            except Exception as e:
-                e = str(e)
-                if 'INVALID_PASSWORD' in e:
-                    flash('Inccorect password. Please try again.')
-                    return render_template('login.html')
-                else:
-                    return f'Login failed due to unknown reason'
     return render_template('login.html')
 
 login = LoginManager(app)
@@ -180,6 +147,20 @@ def oauth2_callback(provider):
     session['user'] = record.username
     return redirect(url_for('homepage'))
 
+# @app.route("/shop_button", methods=["POST"])
+# def shop_button():
+#     new_click = Shop(datetime=datetime.utcnow(), click='1')
+#     db.session.add(new_click)
+#     db.session.commit()
+#     flash('Shop button was clicked')
+#     return render_template('storefront.html')
+
+@app.route("/shop", methods=["GET", "POST"])
+def shop():
+    new_click = Shop(datetime=datetime.utcnow(), click='1')
+    db.session.add(new_click)
+    db.session.commit()
+    return render_template('storefront.html')
 
 # OLD
 
@@ -228,3 +209,30 @@ def oauth2_callback(provider):
 #         return f'Successfully logged in. Redirecting you to the homepage.'
 #     except Exception as e:
 #         return jsonify({'error': str(e)}), 500
+
+#@app.route("/login", methods=["GET", "POST"])
+# def login():
+#     if ('user' in session):
+#         return f'<p>Hi, {session["user"]}</p>'
+#     if request.method == "POST":
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#         try:
+#             user = auth.auth.create_user_with_email_and_password(email, password)
+#             session['user'] = email
+#             return render_template('index.html', user=session['user'])
+#         except:
+#             try:
+#                 user = auth.auth.sign_in_with_email_and_password(email,password)
+#                 # auth.auth.sign_in_with_email_and_password(email, password)
+#                 session['user'] = email
+#                 return render_template('index.html', user=session['user'])
+            
+#             except Exception as e:
+#                 e = str(e)
+#                 if 'INVALID_PASSWORD' in e:
+#                     flash('Inccorect password. Please try again.')
+#                     return render_template('login.html')
+#                 else:
+#                     return f'Login failed due to unknown reason'
+#     return render_template('login.html')

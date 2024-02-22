@@ -7,3 +7,6 @@ app/__pycache__/
 
 #credentials#
 app/credentials/
+
+#env#
+app/.env

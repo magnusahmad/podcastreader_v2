@@ -6,9 +6,10 @@
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message in messages %}
-            <div class="flashes">
-                {{ message }}
-            </div>
+        <div class="alert alert-success" id='hideme' role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+            {{ message }}
+          </div>
         {% endfor %}
     {% endif %}
 {% endwith %}
@@ -29,7 +30,9 @@
 <a href='#main-content'>
 <button class="create-ebook-button">Create from URL</button>
 </a>
-<button hx-post="/shop_button" class="shop-button" type="submit">Shop <i>(Coming soon)</i></button>
+<a href="http://localhost:8080/shop" >
+<button class="shop-button" type="submit">Shop</button>
+</a>
 </div>
 </div>
 <div class="parent">
@@ -69,7 +72,7 @@ placeholder="Which email do you want the eBook be sent to?"
 <a href='http://localhost:8080/login'>
 <button class="login-button hvr-sweep-to-right">Login to begin</button>
 </a>
-<br><br><br>
+<br><br>
 <a href='http://localhost:8080/register'>
 <button class="register-button">Or register for free</button>
 </a>

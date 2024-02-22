@@ -158,16 +158,19 @@ a:hover {
 .hero h1 {
   font-size: 5rem; /* Adjust size as needed */
   margin-bottom: 0.5em;
+  margin-left: 13px;
 }
 
 .hero h5 {
   margin: 0;
+  margin-left: 5px;
 }
 
 
 .hero p {
   font-size: 1.25rem; /* Adjust size as needed */
   margin-bottom: 2em;
+  margin-left: 13px;
   line-height: 1.5;
 }
 
@@ -233,7 +236,9 @@ a:hover {
 .register-button {
   background-color: #090722; /* The button's background color */
   color: #e8e1e1; /* The button text color */
-  padding: 10px; /* Top and bottom padding and left and right padding */
+  padding-top: 10px; /* Top and bottom padding and left and right padding */
+  padding-bottom: 10px;
+  padding-right: 10px;
   font-size: 1.25rem; /* The size of the font */
   border: 1px solid #090722; /* The border of the button */
   border-radius: 8px; /* The radius of the border corners */
@@ -313,7 +318,7 @@ a:hover {
   background-color: #073d3a; /* Match this color to the one in your image */
   position: fixed;
   bottom: 0px;
-  width: 100%;
+  width: 101%;
   height: 10vh;
   color: #fff; /* This is white, assuming your text is white */
   padding: 1rem 0; /* Adjust the padding to match your design */
@@ -362,3 +367,74 @@ a:hover {
   }
 }
 
+/* Storefront */
+
+.store-body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.store-header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.store-header h1 {
+  margin: 0;
+}
+
+.store-header p {
+  margin: 10px 0;
+}
+
+.store-header button {
+  background-color: #f04;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.category {
+  width: 30%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.category img {
+  max-width: 100%;
+  height: auto;
+}
+
+.category h2 {
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Responsive design considerations */
+@media (max-width: 768px) {
+  .category {
+      width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories {
+      flex-direction: column;
+  }
+
+  .category {
+      width: 100%;
+  }
+}

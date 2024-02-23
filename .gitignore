@@ -10,3 +10,4 @@ app/credentials/
 
 #env#
 app/.env
+.env

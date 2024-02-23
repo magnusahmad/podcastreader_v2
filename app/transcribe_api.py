@@ -1,9 +1,13 @@
 from openai import OpenAI
 import os
 import sys
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def whisper_transcribe(input_file):
-    os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_KEY')
+    os.environ["OPENAI_API_KEY"] = os.environ.get('OPENAI_KEY')
+    # os.getenv('OPENAI_KEY')
     client = OpenAI()
 
     txt_file = (input_file.split('.')[0] + '.txt')

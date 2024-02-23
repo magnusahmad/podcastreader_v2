@@ -269,16 +269,9 @@ a:hover {
 }
 
 .header-div {
-  width: 100%;
   position: fixed;
   padding-top: 0px;
   margin-left: -0.8%;
-  /* margin: 0;
-  padding: 0;
-  border-width: 0; */
-}
-
-.header-div {
   height: 5%;
   width: 101%;
   text-align: right;
@@ -286,6 +279,7 @@ a:hover {
   color: white;
   font-size: 20px;
 }
+
 
 .tablink {
   background-color: #073d3a;

@@ -28,10 +28,10 @@ a:hover {
 .main-content-headline {
   display: flex;
   flex-direction: column;
-  height: 20vh;
-  max-width: 800px;
+  height: 30vh;
+  /* max-width: 800px; */
   margin: 0 auto; /* Center the content */
-  padding: 80px; /* Position it lower */
+  padding: 10%; /* Position it lower */
   text-align: center;
 }
 
@@ -39,7 +39,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   height: 80vh;
-  max-width: 800px;
+  max-width: 70%;
   margin: 0 auto; /* Center the content */
   padding: 40px;
   text-align: center;
@@ -47,7 +47,7 @@ a:hover {
 
 .secondary-content {
   display: block; /* Use block for better control over layout */
-  max-width: 400px;
+  max-width: 30%;
   margin-right: 30%; 
   text-align: center;
   flex: 1;
@@ -147,8 +147,10 @@ a:hover {
 }
 
 .hero-content {
-  margin-left: 80px;
+  margin-left: 50px;
+  margin-right: 50px;
   max-width: 700px;
+
   text-align: left;
 }
 
@@ -173,9 +175,10 @@ a:hover {
 
 .shop-button {
   background-color: #989795; /* The button's background color */
-  color: #545151; /* The button text color */
+  color: #000000; /* The button text color */
   padding: 10px 20px; /* Top and bottom padding and left and right padding */
   margin-left: 20px;
+  margin-right: 20px;
   font-size: 1.25rem; /* The size of the font */
   border: 2px solid #989795; /* The border of the button */
   border-radius: 10px; 
@@ -184,6 +187,7 @@ a:hover {
   text-align: center; /* Align the text to the center */
   display: inline-block; /* Display method to allow width and height */
   text-decoration: none; /* Remove underline from links */
+  margin-top: 10px;
 } 
 
 .shop-button:hover {
@@ -279,7 +283,7 @@ a:hover {
 
 
 .tablink {
-  display: inline-block;
+  display: flexbox;
   height: 100%;
   color: white;
   border: none;
@@ -287,7 +291,8 @@ a:hover {
   cursor: pointer;
   /* padding: 10px 14px; */
   font-size: 20px;
-  width: 10%;
+  min-width: 7%;
+  margin-right: 2%;
 }
 
 /* Change background color of buttons on hover */
@@ -385,12 +390,12 @@ a:hover {
 }
 
 .shop-content {
-  display: flex; /* Use block for better control over layout */
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 95vh;
-  /* max-width: 800px; */
-  margin: 0 auto 5%; /* Center the content */
+  /* height: 95vh; */
+  max-width: 80%;
+  margin: 25% auto 5%; /* Center the content */
   text-align: center;
 }
 

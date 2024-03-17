@@ -15,11 +15,7 @@
 {% endwith %}
 {% if user %}
     <div class="header-div">
-        <header class="header">
-        <div class="header-content">
             <a href="http://localhost:8080/logout" class="btn tablink">Logout</a>
-        </div>
-        </footer>
         </div>
     <div class="hero">
     <div class="hero-content">
@@ -27,17 +23,18 @@
     <h1>Welcome back, {{user}}</h1>
 
 <p>Create ebooks from podcasts on demand, or browse an extensive collection of professionally edited podcast ebooks. Start reading podcasts now!</p>
-<a href='#main-content'>
+<a href='#main-content-headline'>
 <button class="create-ebook-button">Create from URL</button>
 </a>
-<a href="http://localhost:8080/shop" >
+<a href="#shop-headline" >
 <button class="shop-button" type="submit">Shop</button>
 </a>
 </div>
 </div>
-<div class="parent">
-<div class="main-content">
+<div>
+<div class="main-content-headline" id="main-content-headline">
 <h1 class="top-headline">Create an ebook from your favourite podcast</h1>
+</div>
 <div class="main-content" id="main-content">
 <p>Provide a YouTube link and you will receive a Kindle-formatted ebook (.epub) to your email after some minutes.</p>
 <form hx-post="/submit" hx-swap="outerHTML" hx-target="#main-content">
@@ -54,10 +51,47 @@ placeholder="Which email do you want the eBook be sent to?"
 <button type="submit">Generate Ebook!</button>
 </form>
 <p>Free previews come unedited with basic transcription. If you would like higher fidelity transcriptions with professional editing, please check our paid options.</p>
+<br><br>
+<div class="down-arrow-button">
+    <p>Or head to the store</p>
+<a href="#shop-headline">
+    <img src="../static/public/down-arrow-icon.png" height="100" width="100" alt="arrow-down">
+</a>
+</div>
+</div>
 </div>
 
+<div class="shop-content" id="shop-headline">
+    <h1 class="categories h1">Popular this week</h1>
+    <div class="categories">
+            <div class="category">
+                <img src="../static/public/Lex Fridman - The Art of Cooking, Tesla, SpaceX, Zip2, and Family.jpg" alt="Lex Fridman">
+                <h5>Try a sample</h5>
+            </div>
+            <div class="category">
+                <img src="../static/public/Andrew Huberman - How to Enhance Focus and Improve Productivity.jpg" alt="Shirts">
+                <h5>Try a sample</h5>
+            </div>
+            <div class="category">
+                <img src="../static/public/Dr Rangan Chatterjee - SLEEP EXPERT Reveals How To Optimize Your Sleep To LIVE LONGER!.jpg" alt="Jeans">
+                <h5>Try a sample</h5>
+            </div>
+    </div>
+    <div class="categories">
+        <div class="category">
+            <img src="../static/public/JRE 1309 - Naval Ravikant.jpg" alt="Lex Fridman">
+            <h5>Try a sample</h5>
+        </div>
+        <div class="category">
+            <img src="../static/public/My First Million - 13 Businesses Making 1000000 With 0 Employees.jpg" alt="Shirts">
+            <h5>Try a sample</h5>
+        </div>
+        <div class="category">
+            <img src="../static/public/Bankless - AI Crypto Coins.jpg" alt="Jeans">
+            <h5>Try a sample</h5>
+        </div>
 </div>
-
+</div>
 {% else %}
 
 <div class="header-div">

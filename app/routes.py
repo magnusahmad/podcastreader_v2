@@ -162,6 +162,10 @@ def shop():
     db.session.commit()
     return render_template('storefront.html')
 
+@app.route("/display-page", methods=["GET", "POST"])
+def display_page():
+    return render_template('display-page.html')
+
 # OLD
 
 # class convert_to_dot_notation(dict):

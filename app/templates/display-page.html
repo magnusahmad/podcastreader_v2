@@ -1,0 +1,72 @@
+<!-- templates/index.html -->
+
+{% extends "base.html" %}
+
+{% block main %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success" id='hideme' role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+            {{ message }}
+          </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% if user %}
+<div class="header-div">
+    <a href="http://localhost:8080/logout" class="btn tablink">Logout</a>
+</div>
+
+<div class="search-bar">
+    <form action="/search" method="get" class="search-form">
+        <input type="text" name="q" placeholder="Search by title, author, subject or ISBN">
+        <input type="submit" value="Search">
+    </form>
+    </div>
+
+<div class="product-feature">
+    <h1>Book Title</h1>
+    <h3>Author</h3>
+    <img src="" alt="">
+    <button>Add to cart</button>
+    <button>Download a sample</button>
+    <div class="product-description">
+        <p>Lorem Ipsum</p>
+
+    <p>Ratings and reviews</p>
+    <button>Write a review</button>
+    </div>
+</div>
+{% else %}
+
+<div class="header-div">
+    <a href="http://localhost:8080/login" class="btn tablink">Login</a>
+</div>
+<div class="header-div">
+    <a href="http://localhost:8080/logout" class="btn tablink">Logout</a>
+</div>
+
+<div class="search-bar">
+    <form action="/search" method="get" class="search-form">
+        <input type="text" name="q" placeholder="Search by title, author, subject or ISBN">
+        <input type="submit" value="Search">
+    </form>
+    </div>
+
+<div class="product-feature">
+    <h1>Book Title</h1>
+    <h3>Author</h3>
+    <img src="" alt="">
+    <button>Add to cart</button>
+    <button>Download a sample</button>
+    <div class="product-description">
+        <p>Lorem Ipsum</p>
+
+    <p>Ratings and reviews</p>
+    <button>Write a review</button>
+    </div>
+</div>
+
+{% endif %}
+{% endblock main %}
